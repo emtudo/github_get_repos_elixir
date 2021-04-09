@@ -19,6 +19,8 @@ defmodule ApiWeb.Router do
   scope "/", ApiWeb do
     pipe_through [:api, :auth]
 
+    pipe_through ApiWeb.Plugs.TokenRefresh
+
     get "/users/:username/repos", GithubRepoIndexController, :handle
   end
 end

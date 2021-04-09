@@ -21,5 +21,15 @@ defmodule ApiWeb.Auth.Guardian do
     end
   end
 
-  def authenticate(_), do: {:error, Error.build(:bad_request, "Invalid or missions params")}
+  def authenticate(_), do: {:error, Error.build(:bad_request, "Invalid or missions params.")}
+
+  def refresh_token(%{"token" => token}) do
+    with {:ok, _old_stuff, {new_token, _new_claims}} <- refresh(token) do
+      {:ok, new_token}
+    else
+      {:error, reason} -> {:error, Error.build(:unauthorized, reason)}
+    end
+  end
+
+  def refresh_token(_), do: {:error, Error.build(:bad_request, "Invalid or missing params.")}
 end

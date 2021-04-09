@@ -17,7 +17,8 @@ config :api, Api.Repo,
 
 config :api, ApiWeb.Auth.Guardian,
   issuer: "api_github",
-  secret_key: "dduOHdwSr6toH1+RukfvsUekTJxMKGQbGcDywTYNelsQOKZJG5clVKw2GaxpniXp"
+  secret_key: "dduOHdwSr6toH1+RukfvsUekTJxMKGQbGcDywTYNelsQOKZJG5clVKw2GaxpniXp",
+  ttl: {1, :minute}
 
 config :api, ApiWeb.Auth.Pipeline,
   module: ApiWeb.Auth.Guardian,
