@@ -8,15 +8,16 @@
 use Mix.Config
 
 config :api,
-  ecto_repos: [Api.Repo]
+  ecto_repos: [Api.Repo],
+  generators: [binary_id: true]
 
 # Configures the endpoint
 config :api, ApiWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "0W/ZFyKOJoao7h73uO8Gr0iNpPDPGD6/WZJnEgs65WsPXO5B8rTGj1JIKdFBc1ZX",
+  secret_key_base: "Q0SuzxhfzhcTeeeiO09Y3uujwe+A/RzAz3nwVfB5facmH3b35PGsSjYILcZDlu38",
   render_errors: [view: ApiWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Api.PubSub,
-  live_view: [signing_salt: "25RiOE7L"]
+  live_view: [signing_salt: "GzR2hFBp"]
 
 # Configures Elixir's Logger
 config :logger, :console,
