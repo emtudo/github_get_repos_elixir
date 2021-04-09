@@ -1,6 +1,6 @@
 defmodule Api.Github.ClientTest do
   alias Api.Github.Client
-  alias Api.{Error, Repo}
+  alias Api.{Error, GithubRepo}
   use ExUnit.Case, async: true
   alias Plug.Conn
   import Api.Factory
@@ -43,18 +43,19 @@ defmodule Api.Github.ClientTest do
       response = Client.get_repos(url, username)
 
       repo = build(:repo)
-      expected_response =  {:ok,
-        [
-          %Repo{
-            description: "SDK PHP da API 3.0 da Cielo",
-            html_url: "https://github.com/emtudo/CIELO-API-3.0-PHP",
-            id: 302_488_004,
-            name: "CIELO-API-3.0-PHP",
-            stargazers_count: 0
-          },
-          repo
-        ]
-      }
+
+      expected_response =
+        {:ok,
+         [
+           %GithubRepo{
+             description: "SDK PHP da API 3.0 da Cielo",
+             html_url: "https://github.com/emtudo/CIELO-API-3.0-PHP",
+             id: 302_488_004,
+             name: "CIELO-API-3.0-PHP",
+             stargazers_count: 0
+           },
+           repo
+         ]}
 
       assert response == expected_response
     end
@@ -76,7 +77,7 @@ defmodule Api.Github.ClientTest do
 
       response = Client.get_repos(url, username)
 
-      expected_response =  {
+      expected_response = {
         :error,
         %Error{
           result: "Username not found.",
@@ -96,9 +97,12 @@ defmodule Api.Github.ClientTest do
 
       response = Client.get_repos(url, username)
 
-      expected_response =  {:error, %Error{
-        result: "Internal Server Error.", status: :internal_server_error}
-      }
+      expected_response =
+        {:error,
+         %Error{
+           result: "Internal Server Error.",
+           status: :internal_server_error
+         }}
 
       assert response == expected_response
     end

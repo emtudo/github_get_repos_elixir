@@ -1,6 +1,6 @@
 defmodule Api.Github.Client do
   alias Api.Github.ClientBehaviour
-  alias Api.{Error, Repo}
+  alias Api.{Error, GithubRepo}
   use Tesla
   alias Tesla.Env
 
@@ -29,6 +29,6 @@ defmodule Api.Github.Client do
 
   defp parse_repos(repos) do
     repos
-    |> Enum.map(&Repo.build/1)
+    |> Enum.map(&GithubRepo.build/1)
   end
 end

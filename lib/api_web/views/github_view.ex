@@ -1,6 +1,6 @@
 defmodule ApiWeb.GithubView do
-  alias Api.Repo
+  alias Api.GithubRepo
   use ApiWeb, :view
 
-  def render("repos.json", %{repos: [%Repo{} | _repos] = repos}), do: repos
+  def render("repos.json", %{repos: [%GithubRepo{} | _repos] = repos}), do: repos
 end
