@@ -18,7 +18,7 @@ defmodule Api.Github.Client do
   end
 
   defp handle_get({:ok, %Env{status: 404}}),
-    do: {:error, Error.build_username_not_found_error()}
+    do: {:error, Error.build_github_username_not_found_error()}
 
   defp handle_get({:ok, %Env{status: 200, body: body}}) do
     {:ok, parse_repos(body)}

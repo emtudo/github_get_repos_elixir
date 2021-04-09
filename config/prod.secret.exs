@@ -4,6 +4,17 @@
 # remember to add this file to your .gitignore.
 use Mix.Config
 
+secret_key =
+  System.get_env("SECRET_KEY") ||
+    raise("""
+    environment variable DATABASE_URL is missing.
+    Secret key. You can use `mix guardian.gen.secret` to get one
+    """)
+
+config :api, ApiWeb.Auth.Guardian,
+  issuer: "api_github",
+  secret_key: secret_key
+
 database_url =
   System.get_env("DATABASE_URL") ||
     raise """

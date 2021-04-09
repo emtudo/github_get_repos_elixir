@@ -11,6 +11,18 @@ config :api,
   ecto_repos: [Api.Repo],
   generators: [binary_id: true]
 
+config :api, Api.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
+
+config :api, ApiWeb.Auth.Guardian,
+  issuer: "api_github",
+  secret_key: "dduOHdwSr6toH1+RukfvsUekTJxMKGQbGcDywTYNelsQOKZJG5clVKw2GaxpniXp"
+
+config :api, ApiWeb.Auth.Pipeline,
+  module: ApiWeb.Auth.Guardian,
+  error_handler: ApiWeb.Auth.ErrorHandler
+
 # Configures the endpoint
 config :api, ApiWeb.Endpoint,
   url: [host: "localhost"],

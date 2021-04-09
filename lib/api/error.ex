@@ -12,5 +12,7 @@ defmodule Api.Error do
     }
   end
 
-  def build_username_not_found_error, do: build(:not_found, "Username not found.")
+  def build_github_username_not_found_error, do: build(:not_found, "Username not found.")
+  def build_user_not_found_error, do: build(:not_found, "User not found.")
+  def build_unauthorized, do: build(:unauthorized, "Please verify your credentials.")
 end
